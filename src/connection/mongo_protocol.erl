@@ -127,6 +127,6 @@ bool(1) -> true.
 add_proj(Projector) when is_map(Projector) ->
   case map_size(Projector) of
     0 -> <<>>;
-    _ -> bson_binary:put_document(Projector)
+    _ -> bson_binary:put_document(bson:document(maps:to_list(Projector)))
   end;
 add_proj(Other) -> bson_binary:put_document(Other).

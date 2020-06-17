@@ -37,7 +37,7 @@ auth(Connection, _, Database, Login, Password) ->   %old authorisation
 
 
 %% @private
--spec mongodb_cr_auth(pid(), binary(), binary(), binary()) -> boolean().
+-spec mongodb_cr_auth(pid(), database(), binary(), binary()) -> boolean().
 mongodb_cr_auth(Connection, Database, Login, Password) ->
   {true, Res} = mc_connection_man:database_command(Connection, Database, {<<"getnonce">>, 1}),
   Nonce = maps:get(<<"nonce">>, Res),
@@ -47,7 +47,7 @@ mongodb_cr_auth(Connection, Database, Login, Password) ->
   end.
 
 %% @private
--spec scram_sha_1_auth(port(), binary(), binary(), binary()) -> boolean().
+-spec scram_sha_1_auth(pid(), database(), binary(), binary()) -> boolean().
 scram_sha_1_auth(Connection, Database, Login, Password) ->
   try
     scram_first_step(Connection, Database, Login, Password)
