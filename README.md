@@ -1,7 +1,6 @@
 This is the [MongoDB](https://www.mongodb.org/) driver for Erlang.
 
-[![Build Status](https://travis-ci.org/comtihon/mongodb-erlang.svg?branch=master)](https://travis-ci.org/comtihon/mongodb-erlang)
-[![Enot](https://enot.justtech.blog/badge?full_name=comtihon/mongodb-erlang)](https://enot.justtech.blog)
+[![Build Status](https://travis-ci.org/redclawtech/mongodb-erlang.svg?branch=master)](https://travis-ci.org/redclawtech/mongodb-erlang)
 
 ### Usage
 Add this repo as the dependency:  
@@ -9,22 +8,23 @@ Rebar
 
     {deps, [
       {mongodb, ".*",
-       {git, "git://github.com/comtihon/mongodb-erlang", {tag, "<Latest tag>"}}}
+       {git, "git://github.com/redclawtech/mongodb-erlang", {tag, "<Latest tag>"}}}
        ]
     }
 Erlang.mk
 
     DEPS = mongodb
-    dep_mongodb = git https://github.com/comtihon/mongodb-erlang.git <Latest tag>
+    dep_mongodb = git https://github.com/redclawtech/mongodb-erlang.git <Latest tag>
 Where __Latest tag__ is the latest tag from github.
 
 ### Installing
+
 If you want to use it from command line - download and compile the application:
 
-	$ git clone git://github.com/comtihon/mongodb-erlang.git mongodb
+	$ git clone git://github.com/redclawtech/mongodb-erlang.git mongodb
 	$ cd mongodb
 	$ make
-You will need `erlang` 18+ and `make` installed.
+You will need `erlang` 21+ and `make` installed.
 
 ### Starting and using the api
 Start all applications, needed by mongodb
@@ -251,7 +251,7 @@ Timeout for operations with cursors may be explicity passed to `mc_cursor:next/2
 
 ### Pooling
 
-If you need simple pool - use modified [Poolboy](https://github.com/comtihon/poolboy), 
+If you need simple pool - use [Poolboy](https://hex.pm/packages/poolboy), 
 which is included in this app's deps. As a worker module use `mc_worker_api`.  
 If you need pool to mongo shard with determining topology - use `mongo_api`
 for automatic topology discovery and monitoring. It uses poolboy inside.
