@@ -62,7 +62,7 @@ get_timeout() ->
     undefined -> infinity
   end.
 
-hmac(One, Two) -> crypto:mac(hmac, sha, One, Two).
+hmac(One, Two) -> hmac(sha, One, Two).
 
 pw_key(Nonce, Username, Password) ->
   bson:utf8(binary_to_hexstr(crypto:hash(md5, [Nonce, Username, pw_hash(Username, Password)]))).
@@ -78,3 +78,17 @@ to_binary(Str) when is_binary(Str) -> Str.
 %% @private
 binary_to_hexstr(Bin) ->
   lists:flatten([io_lib:format("~2.16.0b", [X]) || X <- binary_to_list(Bin)]).
+
+-ifdef(OTP_RELEASE).
+  -if(?OTP_RELEASE >= 23).
+    -define(CRYPTO_MAC, true).
+  -endif.
+-endif.
+
+-ifdef(CRYPTO_MAC).
+hmac(Type, Key, Data) ->
+	crypto:mac(hmac, Type, Key, Data).
+-else.
+hmac(Type, Key, Data) ->
+	crypto:hmac(Type, Key, Data).
+-endif.
