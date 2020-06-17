@@ -1,6 +1,12 @@
-This is the [MongoDB](https://www.mongodb.org/) driver for Erlang.
+This is the [MongoDB](https://www.mongodb.org/) driver for Erlang. This is a fork of the original [comtihon/mongodb-erlang](https://github.com/comtihon/mongodb-erlang) with modifications to our own needs.
 
 [![Build Status](https://travis-ci.org/redclawtech/mongodb-erlang.svg?branch=master)](https://travis-ci.org/redclawtech/mongodb-erlang)
+
+### Differences with the main repo
+
+* Uses [rebar3](https://www.rebar3.org/) instead of the deprecated `rebar`.
+* Uses the upstream [poolboy package](https://hex.pm/packages/poolboy) from hex.pm.
+* Uses latest `pbkdf2` from hex.pm as well.
 
 ### Usage
 Add this repo as the dependency:  
