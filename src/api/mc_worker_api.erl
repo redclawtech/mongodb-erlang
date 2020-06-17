@@ -6,6 +6,8 @@
 -include("mongo_types.hrl").
 -include("mongo_protocol.hrl").
 
+-export([start_link/1]).
+
 -export([
   connect/0,
   connect/1,
@@ -69,6 +71,9 @@ connect(Args) ->  % TODO args as map
     false -> ok
   end,
   {ok, Connection}.
+
+start_link(Args) ->
+  connect(Args).
 
 -spec disconnect(pid()) -> ok.
 disconnect(Connection) ->
