@@ -5,8 +5,8 @@
 
 -include("mongo_protocol.hrl").
 
-
 -compile(export_all).
+-compile(nowarn_export_all).
 
 all() ->
   [
