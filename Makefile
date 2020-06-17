@@ -1,25 +1,25 @@
 PROJECT = mongodb
 
 DIALYZER = dialyzer
-REBAR = $(shell which rebar || echo ./rebar)
+REBAR3 = $(shell which rebar3 || echo ./rebar3)
 
 all: app
 
 # Application.
 
 deps:
-	@$(REBAR) get-deps
+	@$(REBAR3) get-deps
 
 app: deps
-	@$(REBAR) compile
+	@$(REBAR3) compile
 
 clean:
-	@$(REBAR) clean
+	@$(REBAR3) clean
 	rm -f test/*.beam
 	rm -f erl_crash.dump
 
 docs: clean-docs
-	@$(REBAR) doc skip_deps=true
+	@$(REBAR3) doc skip_deps=true
 
 clean-docs:
 	rm -f doc/*.css
@@ -31,17 +31,17 @@ clean-docs:
 tests: clean app eunit ct
 
 eunit:
-	@$(REBAR) eunit skip_deps=true
+	@$(REBAR3) eunit skip_deps=true
 
 ct: app
-	@$(REBAR) ct skip_deps=true
+	@$(REBAR3) ct skip_deps=true
 
 # Dialyzer.
-.$(PROJECT).plt: 
+.$(PROJECT).plt:
 	@$(DIALYZER) --build_plt --output_plt .$(PROJECT).plt -r deps \
 		--apps erts kernel stdlib sasl inets crypto public_key ssl mnesia syntax_tools asn1
 
-clean-plt: 
+clean-plt:
 	rm -f .$(PROJECT).plt
 
 build-plt: clean-plt .$(PROJECT).plt
