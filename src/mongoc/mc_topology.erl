@@ -161,10 +161,13 @@ handle_cast(_Request, State) ->
   {noreply, State}.
 
 handle_info({'DOWN', MRef, _, _, _}, State = #topology_state{topology_opts = Topts, worker_opts = Wopts, servers = Tab}) ->
-  case ets:match(Tab, #mc_server{pid = '$1', host = '$2', mref = MRef, _ = '_'}) of
-    [[Pid, Host]] ->
+   case ets:match(Tab, #mc_server{pid = '$1', host = '$2', mref = MRef, type = '$3', _ = '_'}) of
+    [[Pid, Host, Type]] ->
       true = ets:delete(Tab, Pid),
-      mc_topology_logics:init_seeds([Host], Tab, Topts, Wopts),
+      case Type of
+        deleted -> ok;
+        _Other -> mc_topology_logics:init_seeds([Host], Tab, Topts, Wopts)
+      end,
       {noreply, State};
     [] ->
       {noreply, State}
