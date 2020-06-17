@@ -10,7 +10,7 @@ This is the [MongoDB](https://www.mongodb.org/) driver for Erlang. This is a for
 
 ### Usage
 Add this repo as the dependency:  
-Rebar
+Rebar3
 
     {deps, [
       {mongodb, ".*",
@@ -29,8 +29,8 @@ If you want to use it from command line - download and compile the application:
 
 	$ git clone git://github.com/redclawtech/mongodb-erlang.git mongodb
 	$ cd mongodb
-	$ make
-You will need `erlang` 21+ and `make` installed.
+	$ ./rebar3 shell
+You will need `erlang/otp` 21.3+.
 
 ### Starting and using the api
 Start all applications, needed by mongodb
