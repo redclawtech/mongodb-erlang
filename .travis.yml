@@ -5,7 +5,11 @@ otp_release:
   - 21.3
   - 22.3
   - 23.0
-script:
-  - make tests
+cache:
+  directories:
+    - plts
+    - plts_base
 before_install:
   - sudo docker-compose up -d
+script:
+  - make tests
